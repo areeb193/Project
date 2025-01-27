@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 import exercises from '../../assets/data/exercises';
 
 
-import ExerciseListItem from '../../src/components/ExerciseListitem';
+import ExerciseListItem from '../components/ExerciseListitem';
 export default function App() {
   return (
     
@@ -24,7 +24,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'ghostwhite',
+    
    
     justifyContent: 'center',
     padding: 10,

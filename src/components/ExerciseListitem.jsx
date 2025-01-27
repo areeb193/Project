@@ -48,6 +48,16 @@ export default function ExerciseListItem({item}){
       backgroundColor:'#fff',
       borderRadius: 10,
       gap:5,
+      marginHorizontal:2,
+      shadowColor:'#000',
+      shadowOffset:{
+        width:0,
+        height:1
+      },
+      shadowOpacity:0.2,
+
+      shadowRadius:1.41,
+      elevation:2,
     },
     subValue:{
       textTransform:'capitalize',

@@ -4,10 +4,12 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { StatusBar } from 'expo-status-bar';
 import tw from 'twrnc';
 import { LinearGradient } from 'expo-linear-gradient';
-import Animated,{ FadeIn, FadeInDown, FadeOut } from 'react-native-reanimated';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useRouter } from 'expo-router';
+
 export default function Index() {
-    const router = useRouter();
+  const router = useRouter();
+
   return (
     <View style={tw`flex-1 justify-center`}>
       <StatusBar style="light" />
@@ -19,34 +21,39 @@ export default function Index() {
 
       <LinearGradient
         colors={['transparent', '#18181b']}
-        style={[tw`flex justify-end pb-12 gap-8`, { width: wp(100), height: hp(78) }]}
+        style={[tw`flex justify-end pb-12`, { width: wp(100), height: hp(78) }]}
         start={{ x: 0.5, y: 0.8 }}
       >
-        <Animated.View entering={FadeInDown.delay(100).springify()} style={tw`flex items-center`}>
-          <Text style={[tw`text-white font-bold tracking-wide`, { fontSize: hp(5) }]}>
+        {/* Workout Text */}
+        <Animated.View entering={FadeInDown.delay(100).springify()} style={[tw`flex items-center`, { marginBottom: hp(4) }]}>
+          <Text style={[tw`text-white font-bold`, { fontSize: hp(5), letterSpacing: 1 }]}>
             Best <Text style={[tw`text-rose-500`, { fontSize: hp(5) }]}>Workouts</Text>
           </Text>
-          <Text style={[tw`text-white font-bold tracking-wide`, { fontSize: hp(5) }]}>For you</Text>
+          <Text style={[tw`text-white font-bold`, { fontSize: hp(5), letterSpacing: 1 }]}>For you</Text>
         </Animated.View>
 
-        <Animated.View entering={FadeInDown.delay(100).springify()} style={tw`flex items-center`}>
-          <Text style={[tw`text-white font-bold tracking-wide`, { fontSize: hp(5) }]}>
+        {/* Fit & Healthy Text */}
+        <Animated.View entering={FadeInDown.delay(100).springify()} style={[tw`flex items-center`, { marginBottom: hp(4) }]}>
+          <Text style={[tw`text-white font-bold`, { fontSize: hp(5), letterSpacing: 1 }]}>
             Get <Text style={[tw`text-rose-500`, { fontSize: hp(5) }]}>Fit</Text>
           </Text>
-          <Text style={[tw`text-white font-bold tracking-wide`, { fontSize: hp(5) }]}>
+          <Text style={[tw`text-white font-bold`, { fontSize: hp(5), letterSpacing: 1 }]}>
             And <Text style={[tw`text-rose-500`, { fontSize: hp(5) }]}>Healthy</Text>
           </Text>
         </Animated.View>
 
+        {/* Get Started Button */}
         <Animated.View entering={FadeInDown.delay(200).springify()}>
           <TouchableOpacity
-          onPress={() => router.push('home')}
+            onPress={() => router.push('/home')}
             style={[
-              tw`bg-rose-500 flex items-center justify-center mx-auto rounded-full border-[2px] border-neutral-200`,
+              tw`bg-rose-500 flex items-center justify-center mx-auto rounded-full border-2 border-neutral-200`,
               { height: hp(7), width: wp(80) }
             ]}
           >
-            <Text style={[tw`text-white font-bold tracking-wide`, { fontSize: hp(3) }]}>Get Started</Text>
+            <Text style={[tw`text-white font-bold`, { fontSize: hp(3), letterSpacing: 1 }]}>
+              Get Started
+            </Text>
           </TouchableOpacity>
         </Animated.View>
       </LinearGradient>

@@ -1,31 +1,68 @@
-import { View, Text, TouchableOpacity } from 'react-native';
-import React, { useEffect } from 'react';
+ import { View, Text, TouchableOpacity,  Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { FetchExercisesByBodypart } from '../../api/exerciseDG';
-
+import { demoExercises } from '../constants';
+import { StatusBar } from 'expo-status-bar';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { bodyParts } from '../constants'; // Import the bodyParts array
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import ExerciseList from '../components/ExerciseList';
+import {ScrollView} from 'react-native-virtualized-view'
 export default function Exercises() {
   const router = useRouter();
-  const { bodyPart } = useLocalSearchParams();  // Correctly extract bodyPart from URL params
+  const { bodyPart: bodyPartName } = useLocalSearchParams(); // Extract bodyPart from URL params
+  const [exercises, setExercises] = useState(demoExercises);
 
-  console.log("Got items:", bodyPart); // Now correctly logs the body part name
+  // Find the corresponding bodyPart object
+  const bodyPart = bodyParts.find((part) => part.name === bodyPartName);
+
+  console.log("Got items:", bodyPartName); // Log the body part name
+  console.log("Body part object:", bodyPart); // Log the found body part object
 
   useEffect(() => {
-    if (bodyPart) {
-      getExercises(bodyPart);  // Pass the correct parameter to fetch exercises
-    }
-  }, [bodyPart]);
+    // if (bodyPartName) {
+    //   getExercises(bodyPartName); // Fetch exercises for the body part
+    // }
+  }, [bodyPartName]);
 
-  const getExercises = async (bodyPart) => {
-    let data = await FetchExercisesByBodypart(bodyPart);
+  const getExercises = async (bodyPartName) => {
+    let data = await FetchExercisesByBodypart(bodyPartName);
     console.log(data);
   };
 
   return (
-    <View className="mt-20">
-      <Text>Exercises for {bodyPart}</Text> {/* Display the selected body part */}
-      <TouchableOpacity onPress={() => router.push('/home')} className="bg-primary-500 p-2 rounded-lg mt-4">
-        <Text>Go back</Text>
-      </TouchableOpacity>
+    <ScrollView>
+      <StatusBar style="light" />
+      {bodyPart?.image ? (
+        <Image
+          source={bodyPart.image} // Use the image from the bodyPart object
+          style={{ width: wp(100), height: hp(45) }}
+          className="rounded-b-[40px]"
+          resizeMode="cover"
+        />
+      ) : (
+        <Text className="text-center text-lg mt-10">No image found for {bodyPartName}</Text>
+      )}
+
+
+<TouchableOpacity 
+  className="bg-rose-500 mx-4 absolute flex justify-center items-center pr-1 rounded-full"
+  style={{ height: hp(5.5), width: hp(5.5), marginTop: hp(7) }}
+  onPress={() => router.back()} // Navigate back
+>
+  <Ionicons name="arrow-back" size={hp(4)} color="white" />
+</TouchableOpacity>
+    <View className = "mx-4 space-y-3 mt-4">
+      <Text className="font-semibold text-neutral-700"
+      style={{fontSize: hp(3)}}>
+        {bodyPart.name} Exercise
+      </Text>
+      <View className="mb-10">
+       
+      </View>
+      <ExerciseList data={exercises}/>
     </View>
+    </ScrollView>
   );
-}
+} 

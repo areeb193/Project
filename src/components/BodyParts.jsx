@@ -4,6 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { bodyParts } from '../constants';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 export default function BodyParts() {
   const router = useRouter();
@@ -26,9 +27,9 @@ export default function BodyParts() {
   );
 }
 
-const BodyPartCard = ({ item, router }) => {
+const BodyPartCard = ({ item, router,index }) => {
   return (
-    <View>
+    <Animated.View entering={FadeInDown.duration(400).delay(index*200).springify().damping(3)}>
       <TouchableOpacity
         onPress={() => router.push({ pathname: '/exercises', params: { bodyPart: item.name } })} // Fixed parameter passing
         style={{ width: wp(44), height: hp(24), borderRadius: 20, overflow: 'hidden' }}
@@ -57,6 +58,6 @@ const BodyPartCard = ({ item, router }) => {
           {item?.name}
         </Text>
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 };

@@ -12,7 +12,7 @@ import {ScrollView} from 'react-native-virtualized-view'
 export default function Exercises() {
   const router = useRouter();
   const { bodyPart: bodyPartName } = useLocalSearchParams(); // Extract bodyPart from URL params
-  const [exercises, setExercises] = useState(demoExercises);
+  const [exercises, setExercises] = useState();
 
   // Find the corresponding bodyPart object
   const bodyPart = bodyParts.find((part) => part.name === bodyPartName);
@@ -21,13 +21,14 @@ export default function Exercises() {
   console.log("Body part object:", bodyPart); // Log the found body part object
 
   useEffect(() => {
-    // if (bodyPartName) {
-    //   getExercises(bodyPartName); // Fetch exercises for the body part
-    // }
+    if (bodyPartName) {
+      getExercises(bodyPartName); // Fetch exercises for the body part
+    }
   }, [bodyPartName]);
 
   const getExercises = async (bodyPartName) => {
     let data = await FetchExercisesByBodypart(bodyPartName);
+    setExercises(data)
     console.log(data);
   };
 

@@ -7,6 +7,9 @@ export default function _layout() {
     <Stack
     screenOptions={{ headerShown: false}}>
     <Stack.Screen name="exercises" options={{
+      presentation: 'fullScreenModal',
+    }}/>
+    <Stack.Screen name="exerciseDetails" options={{
       presentation: 'modal',
     }}/>
     

@@ -1,8 +1,8 @@
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
-import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Image } from 'expo-image';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 export default function ExerciseList({ data }) {
   const router = useRouter();
@@ -24,10 +24,12 @@ export default function ExerciseList({ data }) {
 
 const ExerciseCard = ({ item, router, index }) => {
   console.log(item.gifUrl); // Debugging: Log the GIF URL
+  
+
 
   return (
-    <View>
-      <TouchableOpacity
+    <Animated.View entering={FadeInDown.duration(400).delay(index*200).springify()}>
+      <TouchableOpacity onPress={()=> router.push({pathname:'/exerciseDetails' , params: item})}
         className="flex py-3 space-y-2"
         // onPress={() => router.push(`/exercise-detail/${item.id}`)} // Add navigation to the exercise detail page
       >
@@ -46,6 +48,6 @@ const ExerciseCard = ({ item, router, index }) => {
           {item?.name?.length > 20 ? item.name.slice(0, 20) + '...' : item.name}
         </Text>
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 };

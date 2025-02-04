@@ -11,7 +11,7 @@
     "splash": {
       "image": "./assets/splashicon.png",
       "resizeMode": "contain",
-      "backgroundColor": "##fc035e"
+      "backgroundColor": "#fc035e"
     },
     "ios": {
       "supportsTablet": true
@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.areeb1114.Workout"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -28,6 +29,14 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "f2456caa-0831-46f8-a316-d91d1839fbb3"
+      }
+    }
   }
 }

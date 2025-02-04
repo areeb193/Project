@@ -9,8 +9,12 @@ import { bodyParts } from '../constants'; // Import the bodyParts array
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import ExerciseList from '../components/ExerciseList';
 import {ScrollView} from 'react-native-virtualized-view'
+import { useProfile } from '../context/ProfileContext';  // Import useProfile hook
+
 export default function Exercises() {
   const router = useRouter();
+    const { userData } = useProfile();  // Access user data from context
+  
   const { bodyPart: bodyPartName } = useLocalSearchParams(); // Extract bodyPart from URL params
   const [exercises, setExercises] = useState();
 
@@ -57,7 +61,7 @@ export default function Exercises() {
     <View className = "mx-4 space-y-3 mt-4">
       <Text className="font-semibold text-neutral-700"
       style={{fontSize: hp(3)}}>
-        {bodyPart.name} Exercise
+        {bodyPart.name} Exercise for {` ${userData.name}`}
       </Text>
       <View className="mb-10">
        

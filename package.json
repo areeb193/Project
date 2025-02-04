@@ -31,7 +31,8 @@
     "react-native-web": "~0.19.13",
     "tailwindcss": "^3.4.17",
     "twrnc": "^4.6.1",
-    "expo-image": "~2.0.4"
+    "expo-image": "~2.0.4",
+    "@react-native-community/slider": "4.5.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

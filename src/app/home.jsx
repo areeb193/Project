@@ -44,12 +44,12 @@ export default function Home() {
               className="rounded-full"
             />
           </TouchableOpacity>
-          <View
+          <TouchableOpacity  onPress={() =>router.push('/BmiCalculatorScreen')}
             className="bg-neutral-200 rounded-full flex justify-center items-center border-[3px] border-neutral-100"
             style={{ height: hp(5.5), width: hp(5.5) }}
           >
-            <Ionicons name="notifications" size={hp(2.5)} color="gray" />
-          </View>
+            <Ionicons name="calculator" size={hp(2.5)} color="red" />
+          </TouchableOpacity>
         </View>
       </View>
       <View>
